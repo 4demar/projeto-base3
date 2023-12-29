@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { Header } from "./Componentes/Header";
+import { GlobalStyle } from "./Style/global";
+import { ExportarParaExcel } from "./Componentes/ExportarParaExcel";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+export function App() {
+   return (
+      <>
+
+         <Header />
+         <BrowserRouter>
+            <div className="row mt-3">
+               <div className="col-6">
+                  <ul>
+                     <li><Link to="/ExportarExcel">Exportar Para Excel</Link><br /></li>
+                  </ul>
+               </div>
+               {/* <div className="col-6">
+            <ul>
+              <li><Link to="/Paginacao_Simples">Paginação Simples</Link><br /></li>
+              
+            </ul>
+          </div> */}
+            </div>
+
+            <Routes>
+               <Route path="/"></Route>
+               <Route path="/ExportarExcel" element={<ExportarParaExcel />} />
+
+               {/* Exemplo abaixo */}
+               {/* <Route path="/Paginacao_Simples" element={<Paginacao_Simples />}></Route> */}
+
+            </Routes>
+         </BrowserRouter>
+         <GlobalStyle />
+
+      </>
+   );
 }
-
-export default App;
