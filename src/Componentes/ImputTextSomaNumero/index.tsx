@@ -19,6 +19,7 @@ export function InserirNumeroESomar() {
 
    const LimparCampos = () => {
       setValor(0)
+      setValorString("")
    }
 
    // const vlMonetario = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,9 +30,16 @@ export function InserirNumeroESomar() {
    //    setValor(value)
    // }
 
-   function handleKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
-      if (event.key === "Enter" && valor > 0)
+   function handleKeyPressCampo1(event: React.KeyboardEvent<HTMLInputElement>) {
+      if (event.key === "Enter" && valor > 0 || valorString !== '')
          clickInserirValor()
+
+   }
+
+   function handleKeyPressCampo2(event: React.KeyboardEvent<HTMLInputElement>) {
+      if (event.key === "Enter" && valorString !== '' && valorString != 'R$')
+         clickInserirValor()
+
    }
 
    const handleValorChange = (event: any) => {
@@ -43,7 +51,7 @@ export function InserirNumeroESomar() {
       <>
          <div className="container text-center">
             <div className="row justify-content-center mt-3">
-               <div className="col-3">
+               <div className="col-md-3 col-ls-3">
                   <div className="col-12">
                      <div className="col-10">Valor 1</div>
                      <div className="col-12 d-flex">
@@ -54,7 +62,7 @@ export function InserirNumeroESomar() {
                            placeholder="R$"
                            value={valor === 0 ? '' : valor}
                            onChange={(event) => setValor(parseInt(event.target.value))} //Falta validar numero com virgula
-                           onKeyDown={(event) => handleKeyPress(event)}
+                           onKeyDown={(event) => handleKeyPressCampo1(event)}
                         />
                         <div className="col-2">{valorTotal}</div>
                      </div>
@@ -68,7 +76,8 @@ export function InserirNumeroESomar() {
                            min="1"
                            placeholder="R$"
                            value={valorString}
-                           onChange={handleValorChange} //Falta validar numero com virgula
+                           onChange={handleValorChange}
+                           onKeyDown={(event) => handleKeyPressCampo2(event)}
                         />
                         <div className="col-2">{valorStringTotal}</div>
                      </div>
@@ -76,7 +85,7 @@ export function InserirNumeroESomar() {
                </div>
             </div>
             <div className="row justify-content-center mt-3">
-               <div className="col-4">
+               <div className="col-md-3 col-ls-3">
                   <button className="col-12 btn btn-primary" onClick={clickInserirValor}>Inserir</button>
                </div>
 
