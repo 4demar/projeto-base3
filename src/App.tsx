@@ -4,6 +4,7 @@ import { Header } from "./Componentes/Header";
 import { GlobalStyle } from "./Style/global";
 import { ExportarParaExcel } from "./Componentes/ExportarParaExcel";
 import { InserirNumeroESomar } from "./Componentes/ImputTextSomaNumero";
+import { CadastroUsuario } from "./Pages/CadastroUsuario";
 
 
 export function App() {
@@ -28,6 +29,7 @@ export function App() {
                <Route path="/"></Route>
                <Route path="/ExportarExcel" element={<ExportarParaExcel />} />
                <Route path="/InserirNumeroESomar" element={<InserirNumeroESomar />}></Route>
+               <Route path="/CadastroUsuario" element={<CadastroUsuario />} />
             </Routes>
          </BrowserRouter>
          <GlobalStyle />
