@@ -3,8 +3,8 @@ import ptBR from "date-fns/locale/pt-BR";
 import { ChangeEvent, forwardRef, useCallback, useRef, useState } from 'react'
 import 'react-datepicker/dist/react-datepicker.css'
 import { FaRegCalendarAlt } from "react-icons/fa";
-import { Item } from "./styles";
 import { DateMask } from "../Maskara";
+import { Item } from "./styles";
 registerLocale("ptBR", ptBR);
 
 type Props = {
@@ -43,6 +43,9 @@ export function InputDate({ value, onChange }: Props) {
             dateFormatCalendar="MMMM"
             onChange={onChange}
          />
+         {/* <i>
+            <FaRegCalendarAlt onClick={handleFocus} />
+         </i> */}
       </Item>
    );
 }
