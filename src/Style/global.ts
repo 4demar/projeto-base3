@@ -95,4 +95,19 @@ export const GlobalStyle = createGlobalStyle`
          filter: brightness(0.8);
       }
    }
+   
+   video {
+        object-fit: contain;
+        width: 100%;
+    }
+
+    canvas {
+        width: 100%;
+        position: absolute;
+        left: 0;
+    }
+
+    .pointer-mouse {
+      cursor: pointer;
+    }
 `

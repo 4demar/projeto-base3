@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import PivotGrid, { FieldChooser, FieldPanel, } from 'devextreme-react/pivot-grid';
+import PivotGrid, { FieldChooser, FieldPanel } from 'devextreme-react/pivot-grid';
 import PivotGridDataSource from 'devextreme/ui/pivot_grid/data_source';
 
-import { sales } from './data';
+import { DadosPorRegiao } from './data';
 import { dadosConsulta } from './dadosConsulta';
 
 export const TabelaDinamica = () => {
@@ -93,22 +93,57 @@ export const TabelaDinamica = () => {
       store: dadosConsulta,
    })
 
+   const dataSource = new PivotGridDataSource({
+      fields: [
+         {
+            dataField: 'Id',
+            visible: false,
+         },
+         {
+            caption: 'Regiao',
+            dataField: 'Regiao',
+            width: 120,
+            area: 'row',
+         },
+         {
+            caption: 'Data',
+            dataField: 'Data',
+            area: 'column',
+
+         },
+         // {
+         //    caption: 'Valor',
+         //    dataField: 'Valor',
+         //    dataType: 'number',
+         //    summaryType: 'sum',
+         //    format: {
+         //       type: 'currency',
+         //       currency: 'BRL',
+         //       precision: 2,
+         //    },
+         //    area: 'data',
+         // }
+      ],
+      store: DadosPorRegiao,
+   });
+
    return (
       <>
          <div className="long-title mt-5">
             <h3>Valores por Região</h3>
          </div>
          <PivotGrid
-            dataSource={ConfiguracaoInicial}
-            // allowSortingBySummary={true}
-            // allowSorting={true}
-            // allowFiltering={true}
-            // allowExpandAll={true}
+            dataSource={dataSource}
+            allowSortingBySummary={false}
+            allowSorting={false}
+            allowFiltering={false}
+            allowExpandAll={false}
             height={400}
             showBorders={true}
-            showRowGrandTotals={true}
-            // showColumnTotals={true}
-            showColumnGrandTotals={true}
+            showRowGrandTotals={false}
+            showRowTotals={false}
+            showColumnTotals={false}
+            showColumnGrandTotals={false}
          >
             {/* <FieldChooser enabled={false} /> Retira o configurador do pivot grid */}
             {/* <FieldChooser
@@ -117,10 +152,6 @@ export const TabelaDinamica = () => {
             /> */}
 
             <FieldPanel
-               showColumnFields={true}
-               showDataFields={false}
-               showFilterFields={false}
-               showRowFields={false}
                allowFieldDragging={true}
                visible={true}
             />
@@ -129,37 +160,3 @@ export const TabelaDinamica = () => {
       </>
    )
 };
-
-const dataSource = new PivotGridDataSource({
-   fields: [
-      {
-         caption: 'Region',
-         width: 120,
-         dataField: 'region',
-         area: 'row',
-      },
-      {
-         caption: 'City',
-         dataField: 'city',
-         width: 150,
-         area: 'row',
-         selector(data: any) {
-            return `${data.city} (${data.country})`;
-         },
-      },
-      {
-         dataField: 'date',
-         dataType: 'date',
-         area: 'column',
-      },
-      {
-         caption: 'Sales',
-         dataField: 'amount',
-         dataType: 'number',
-         summaryType: 'sum',
-         format: 'currency',
-         area: 'data',
-      }
-   ],
-   store: sales,
-});

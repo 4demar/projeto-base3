@@ -6,6 +6,9 @@ import { Conteudo } from "../Style/styles";
 import { Enum_Permissao } from "../Utils/Enum";
 import { usePermissao } from "../Hook/usePermissao";
 import { TabelaDinamica } from "../Componentes/PivotGrid";
+import { Relogio } from "../Componentes/Relogio";
+import { CameraWeb } from "../Componentes/CameraWeb";
+import { MyDropzone } from "../Componentes/MyDropzone";
 
 // type Props = {
 //    listaPermissao: PermissaoTela[]
@@ -24,22 +27,26 @@ export function RoutesApp() {
    //       return <PaginaRestrita />
    // }
 
+   function RenderizarPagina() {
+      setInterval(Relogio, 1000)
+   }
+
+
    return (
       <Conteudo>
          <BrowserRouter>
-            <div className="row mt-3">
-               <div className="col-6">
-                  <ul>
-                     <li><Link to="/ExportarExcel">Exportar Para Excel</Link><br /></li>
-                     <li><Link to="/CadastroUsuario">Cadastro Usuario</Link><br /></li>
-                  </ul>
-               </div>
-               <div className="col-6">
-                  <ul>
-                     <li><Link to="/InserirNumeroESomar">Inserir Numero e Somar</Link><br /></li>
-                     <li><Link to="/TabelaDinamica">Tabela Dinamica</Link><br /></li>
+            <div className="row mt-3 d-flex justify-content-center">
+               <div className="col-md-2 col-ls-6 text-center mx-3">
+                  <Link to="/ExportarExcel">Exportar Para Excel</Link><br />
+                  <Link to="/CadastroUsuario">Cadastro Usuario</Link><br />
+                  <Link to="/Relogio">Relógio</Link><br />
+                  <Link to="/Dropzone">Dropzone</Link><br />
 
-                  </ul>
+               </div>
+               <div className="col-md-2 col-ls-6 text-center mx-3">
+                  <Link to="/InserirNumeroESomar">Inserir Numero e Somar</Link><br />
+                  <Link to="/TabelaDinamica">Tabela Dinamica</Link><br />
+                  <Link to="/CameraWeb">CameraWeb</Link><br />
                </div>
             </div>
 
@@ -49,7 +56,9 @@ export function RoutesApp() {
                <Route path="/InserirNumeroESomar" element={ValidaPermissao(Enum_Permissao.SOMA_NUMERO, <InserirNumeroESomar />)} />
                <Route path="/CadastroUsuario" element={ValidaPermissao(Enum_Permissao.CADASTRO, <CadastroUsuario />)} />
                <Route path="/TabelaDinamica" element={<TabelaDinamica />} />
-
+               <Route path="/Relogio" element={<Relogio />} />
+               <Route path="/CameraWeb" element={<CameraWeb />} />
+               <Route path="/Dropzone" element={<MyDropzone />} />
             </Routes>
          </BrowserRouter>
       </Conteudo>

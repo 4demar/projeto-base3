@@ -9,3 +9,8 @@ export interface PermissaoTela {
    nomeTela: string,
    permissao: boolean
 }
+
+export interface MeusArquivos {
+   index: string
+   doc: File
+}
