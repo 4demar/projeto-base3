@@ -1,18 +1,18 @@
-import { Width } from 'devextreme-react/cjs/chart';
-import React, { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Modal } from "react-bootstrap";
 import { StyleContainerScan } from './styles';
 import { FaCamera } from 'react-icons/fa';
-import { ExibirDocumentos } from '../ExibirDocumentos';
-import { MeusArquivos } from '../../Interfaces';
+import { DadosImagem } from '../../Interfaces';
 
-export const CameraWeb = () => {
+type props = {
+   imagemObtida: (dadosImagem: DadosImagem) => void
+}
+
+export const CameraWeb = ({ imagemObtida }: props) => {
    const videoRef = useRef<HTMLVideoElement>(null);
-   let imagem = document.createElement('canvas');
+   const imagem = document.createElement('canvas');
    const [showModalCamera, setShowModalCamera] = useState<boolean>(false);
    const [playCamera, setPlayCamera] = useState<boolean>(false);
-
-   const [listaDocumentos, setListaDocumentos] = useState<MeusArquivos[]>([]);
 
    const constraints = {
       video: { facingMode: "environment" }
@@ -48,15 +48,10 @@ export const CameraWeb = () => {
             if (blob) {
                const file = new File([blob], blob.size + '.jpeg', { type: 'image/jpeg' });
 
-               // Use o arquivo conforme necessário
-               const novaLista = [
-                  ...listaDocumentos,
-                  {
-                     index: blob.size.toString(),
-                     doc: file
-                  }
-               ]
-               setListaDocumentos(novaLista)
+               imagemObtida({
+                  stringImagem: blob.size.toString(),
+                  fileImagem: file
+               })
             }
          });
 
@@ -100,8 +95,6 @@ export const CameraWeb = () => {
          </Modal>
 
          {/* <canvas ref={canvasRef}></canvas> */}
-
-         {listaDocumentos.length > 0 && <ExibirDocumentos listaDocumentos={listaDocumentos} />}
       </div>
    );
 };

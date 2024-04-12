@@ -31,6 +31,7 @@
       "react-toastify": "^10.0.4",
       "sheetjs-style": "0.15.8",
       "styled-components": "5.3.5",
+      "tesseract.js": "^5.0.5",
       "typescript": "^4.4.2",
       "web-vitals": "^2.1.0"
    },

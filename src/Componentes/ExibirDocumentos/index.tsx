@@ -1,16 +1,16 @@
 import { Modal } from "react-bootstrap"
 import { FaFile, FaFileAlt, FaFileAudio, FaFileImage, FaFileVideo } from "react-icons/fa"
-import { MeusArquivos } from "../../Interfaces"
+import { DadosImagem } from "../../Interfaces"
 import { useEffect, useState } from "react"
 import { StyleDropzone } from "../MyDropzone/styles"
 
 type Props = {
-   listaDocumentos: MeusArquivos[]
+   listaDocumentos: DadosImagem[]
 }
 
 export const ExibirDocumentos = ({ listaDocumentos }: Props) => {
    const [imagemModal, setImagemModal] = useState<boolean>(false);
-   const [exibirDocumento, setExibirDocumento] = useState<MeusArquivos>({} as MeusArquivos)
+   const [exibirDocumento, setExibirDocumento] = useState<DadosImagem>({} as DadosImagem)
 
    const getExtensionIcon = (extension: string) => {
       switch (extension) {
@@ -49,15 +49,15 @@ export const ExibirDocumentos = ({ listaDocumentos }: Props) => {
       } else if (["wmv", "avi", "mp4", "mov"].includes(extension)) {
          return <video controls width="100%"><source src={url} type={`video/${extension}`} /></video>;
       } else {
-         return <iframe src={url} title={exibirDocumento.doc.name} width="100%" height="600px"></iframe>;
+         return <iframe src={url} title={exibirDocumento.fileImagem.name} width="100%" height="600px"></iframe>;
       }
    };
 
    const downloadFile = () => {
       const link = document.createElement("a");
-      link.href = JSON.stringify(exibirDocumento.doc);
+      link.href = JSON.stringify(exibirDocumento.fileImagem);
       link.target = "_blank";
-      link.download = exibirDocumento.doc.name;
+      link.download = exibirDocumento.fileImagem.name;
       link.click();
    };
 
@@ -70,7 +70,7 @@ export const ExibirDocumentos = ({ listaDocumentos }: Props) => {
          <h3 className="mt-5"><b>Anexos Cadastrados</b></h3>
          <div className="row">
             {listaDocumentos.map((anexos, key) => {
-               let extension = anexos.doc.type;
+               let extension = anexos.fileImagem.type;
                return (
                   <div
                      key={key}
@@ -78,7 +78,7 @@ export const ExibirDocumentos = ({ listaDocumentos }: Props) => {
                      onClick={() => setExibirDocumento(anexos)}
                   >
                      {getExtensionIcon(extension)}
-                     <small className="p-2">{anexos.doc.name}</small>
+                     <small className="p-2">{anexos.fileImagem.name}</small>
                   </div>
                )
             })
@@ -89,8 +89,8 @@ export const ExibirDocumentos = ({ listaDocumentos }: Props) => {
             <Modal.Body>
                <div className="container">
                   <div className="row">
-                     {ApresentarImagem(exibirDocumento.doc.type, JSON.stringify(exibirDocumento.doc))}
-                     <label className="d-flex justify-content-end">{exibirDocumento.doc.name}</label>
+                     {ApresentarImagem(exibirDocumento.fileImagem.type, JSON.stringify(exibirDocumento.fileImagem))}
+                     <label className="d-flex justify-content-end">{exibirDocumento.fileImagem.name}</label>
                   </div>
                   <div className="row d-flex justify-content-end">
                      <div className="d-flex justify-content-end">

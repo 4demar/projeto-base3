@@ -10,7 +10,7 @@ export interface PermissaoTela {
    permissao: boolean
 }
 
-export interface MeusArquivos {
-   index: string
-   doc: File
+export interface DadosImagem {
+   stringImagem: string
+   fileImagem: File
 }

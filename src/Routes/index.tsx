@@ -9,6 +9,8 @@ import { TabelaDinamica } from "../Componentes/PivotGrid";
 import { Relogio } from "../Componentes/Relogio";
 import { CameraWeb } from "../Componentes/CameraWeb";
 import { MyDropzone } from "../Componentes/MyDropzone";
+import { LerImagem } from "../Componentes/LerImagem";
+import { ListaImagemCamera } from "../Componentes/ListaImagemCamera";
 
 // type Props = {
 //    listaPermissao: PermissaoTela[]
@@ -46,7 +48,8 @@ export function RoutesApp() {
                <div className="col-md-2 col-ls-6 text-center mx-3">
                   <Link to="/InserirNumeroESomar">Inserir Numero e Somar</Link><br />
                   <Link to="/TabelaDinamica">Tabela Dinamica</Link><br />
-                  <Link to="/CameraWeb">CameraWeb</Link><br />
+                  <Link to="/ListaImagemCamera">ListaImagemCamera</Link><br />
+                  <Link to="/LerImagem">Ler Imagem</Link><br />
                </div>
             </div>
 
@@ -57,8 +60,9 @@ export function RoutesApp() {
                <Route path="/CadastroUsuario" element={ValidaPermissao(Enum_Permissao.CADASTRO, <CadastroUsuario />)} />
                <Route path="/TabelaDinamica" element={<TabelaDinamica />} />
                <Route path="/Relogio" element={<Relogio />} />
-               <Route path="/CameraWeb" element={<CameraWeb />} />
+               <Route path="/ListaImagemCamera" element={<ListaImagemCamera />} />
                <Route path="/Dropzone" element={<MyDropzone />} />
+               <Route path="/LerImagem" element={<LerImagem />} />
             </Routes>
          </BrowserRouter>
       </Conteudo>

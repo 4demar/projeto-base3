@@ -2,10 +2,10 @@ import Dropzone, { defaultClassNames, IFileWithMeta, ILayoutProps, StatusValue }
 import { StyleDropzone } from './styles'
 import { BsPaperclip } from 'react-icons/bs';
 import { useState } from 'react';
-import { MeusArquivos } from "../../Interfaces";
+import { DadosImagem } from "../../Interfaces";
 
 export function MyDropzone() {
-   const [anexos, setAnexos] = useState<MeusArquivos[]>([]);
+   const [anexos, setAnexos] = useState<DadosImagem[]>([]);
 
    // const Layout = ({ input, previews, dropzoneProps, submitButton, extra: { maxFiles } }: ILayoutProps) => {
    //    return (
@@ -33,10 +33,10 @@ export function MyDropzone() {
                      <>
                         <div className="col col-md-1 d-flex p-0 mb-2">
                            <img
-                              src={URL.createObjectURL(item.doc)}
+                              src={URL.createObjectURL(item.fileImagem)}
                               className="dzu-previewImage"
                            />
-                           <div className="dzu-previewButton" onClick={() => RemoverImagem(item.index)}>X</div>
+                           <div className="dzu-previewButton" onClick={() => RemoverImagem(item.stringImagem)}>X</div>
                         </div>
                      </>
                   ))}
@@ -48,7 +48,7 @@ export function MyDropzone() {
 
    const handleChangeStatus = ({ file, meta }: IFileWithMeta, status: StatusValue) => {
       if (status === "removed") { //remover
-         const newList = anexos.filter(item => item.index !== meta.id)
+         const newList = anexos.filter(item => item.stringImagem !== meta.id)
          setAnexos(newList)
       }
       if (status === 'done') { //inserir
@@ -57,7 +57,7 @@ export function MyDropzone() {
    }
 
    const RemoverImagem = (id: string) => {
-      const newList = anexos.filter(item => item.index !== id)
+      const newList = anexos.filter(item => item.stringImagem !== id)
       setAnexos(newList)
    }
 
@@ -66,8 +66,8 @@ export function MyDropzone() {
       const newList = [
          ...anexos,
          {
-            index: id,
-            doc: file
+            stringImagem: id,
+            fileImagem: file
          }
       ]
       setAnexos(newList)
